@@ -16,8 +16,9 @@ public class Login extends BaseClass{
 
     @Before
     public void initElement(){
-        loginPage = new LoginPage(getDriver());
-        homePage = new HomePage(getDriver());
+        System.out.println("Init called");
+        loginPage = new LoginPage();
+        homePage = new HomePage();
     }
 
     @Given("User launch swag lab url")

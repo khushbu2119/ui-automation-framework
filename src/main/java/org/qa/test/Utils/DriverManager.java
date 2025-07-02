@@ -12,14 +12,17 @@ public class DriverManager {
 
     private static WebDriver driver;
 
+    public static void initDriver() {
+        ChromeOptions options = setupBrowserConfiguration();
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    }
+
     public static WebDriver getDriver() {
-     if(driver == null) {
-         WebDriverManager.chromedriver().setup();
-         ChromeOptions options = setupBrowserConfiguration();
-         driver = new ChromeDriver(options);
-         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-     }
-     return driver;
+        if (driver == null) {
+            initDriver();
+        }
+        return driver;
     }
 
     private static ChromeOptions setupBrowserConfiguration() {
@@ -34,7 +37,7 @@ public class DriverManager {
     }
 
     public static void quitDriver() {
-        if(driver != null) {
+        if (driver != null) {
             driver.quit();
         }
     }
